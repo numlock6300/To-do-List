@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+</head>
+<header>
+    <div class="logo-container">
+        <img src="./img/logo.jpg" alt="logo">
+    </div>
+    <div class="logo-title">
+        <h1>To-Do...</h1>
+    </div>
+    <div><button class="add-task-button">Add Task</button></div>
+</header>
+<body>
+    <div class="content">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <img src="./img/inbox.png" alt="Inbox">
+                    <span>Inbox</span>
+                </li>
+                <li>
+                    <img src="./img/today.png" alt="Today">
+                    <span>Today</span>
+                </li>
+                <li> 
+                    <div>
+                        <img src="./img/projects.png" alt="Projects">
+                        <span>Projects</span>
+                    </div>
+                        <ul class="projects-container">
+                            <li>My project</li>
+                            <li>
+                                <button class="project-button">+</button>
+                            </li>
+                        </ul>
+                </li>
+            </ul>
+            <form class="add-project-form hidden">
+                <div class="input-container">
+                    <label for="project-name">Name: </label>
+                    <input type="text" name="project-name" id="project-name">
+                </div>
+                <div class="add-project-form-buttons">
+                    <button type="button">Ok</button>
+                    <button type="button">Cancel</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="main-content">
+            <div class="task-container">
+                <div class="task-overview">
+                    <div class="task-name">Task</div>
+                    <div class="task-buttons">
+                        <button class="task-button">
+                            <img src="./img/edit.png" alt="edit">
+                        </button>
+                        <button class="task-button">
+                            <img src="./img/priority.png" alt="priority">
+                        </button>
+                        <button class="task-button">
+                            <img src="./img/move.png" alt="move">
+                        </button>
+                        <button class="task-button">
+                            <img src="./img/delete.png" alt="delete">
+                        </button>
+                    </div>
+                </div>
+                <div class="task-description">
+                    <div>
+                        <span>Title: </span><span>Task</span>
+                    </div>
+                    <div>
+                        <span>Description: </span><span>Task description</span>
+                    </div>
+                    <div>
+                        <span>Due Date: </span><span>21.05.2023</span>
+                    </div>
+                    <div>
+                        <span>Priority: </span><span>Medium</span>
+                    </div>
+                </div>
+            </div>
+            <form class="create-task hidden">
+                <div class="input-container">
+                    <label for="title">Title: </label>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div class="input-container">
+                    <label for="due-date">Due Date: </label>
+                    <input type="date" name="due-date" id="due-date">
+                </div>
+                <div class="input-container">
+                    <label for="description">Description: </label>
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="input-container">
+                    <label for="priority">Priority: </label>
+                    <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <label for="select-project">Project: </label>
+                    <select name="select-project" id="select-project">
+                        <option value="my project">My project</option>
+                    </select>
+                </div>
+                <div class="task-form-buttons">
+                    <button type="button">Cancel</button>
+                    <button type="button">Ok</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+form * {
+    appearance: none;
+    width: 100%;
+}
+
+.create-task {
+    background-color: white;
+    display: grid;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
+    box-shadow: 1px 5px 10px black;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.task-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
