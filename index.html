@@ -33,21 +33,22 @@
                         <span>Projects</span>
                     </div>
                         <ul class="projects-container">
-                            <li>My project</li>
+                            <!-- <li>My project</li>
                             <li>
                                 <button class="project-button">+</button>
-                            </li>
+                            </li> -->
                         </ul>
+                        <button class="project-button">+</button>
                 </li>
             </ul>
             <form class="add-project-form hidden">
                 <div class="input-container">
                     <label for="project-name">Name: </label>
-                    <input type="text" name="project-name" id="project-name">
+                    <input type="text" name="project-name" id="project-name" required>
                 </div>
                 <div class="add-project-form-buttons">
-                    <button type="button">Ok</button>
-                    <button type="button">Cancel</button>
+                    <button type="button" id="project-ok-button">Ok</button>
+                    <button type="button" id="project-cancel-button">Cancel</button>
                 </div>
             </form>
             
