@@ -4,6 +4,8 @@ export class Project {
         this.container = [];
     }
 
+    static projects = [];
+
     getName() {
         return this.name;
     }

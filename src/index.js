@@ -13,26 +13,31 @@ import "./img/move.png";
 import "./img/delete.png";
 
 import { Task } from "./Tasks";
-import { Project } from "./projects";
+// import { Project } from "./projects";
 import { format } from "date-fns";
+import * as events from "./eventListeners";
+import { createProject } from "./functions";
+import { renderProject } from "./renders";
 
 
-const task1 = new Task("Task","some task", " 12.12.2022", "Low", "Default");
-console.log(task1.getTitle());
+// const task1 = new Task("Task","some task", " 12.12.2022", "Low", "Default");
+// console.log(task1.getTitle());
 
-const project1 = new Project("New Project");
-console.log(project1.getName());
+// const project1 = new Project("New Project");
+// console.log(project1.getName());
 
-console.log(format(new Date(2014, 1,11), "yyyy-MM-dd"));
+// console.log(format(new Date(2014, 1,11), "yyyy-MM-dd"));
+createProject("My project");
+ events.OpenAddTaskForm();
+ events.OpenAddProjectForm();
+ events.CloseAddProjectForm();
+ events.AddProject();
+ renderProject();
 
-const addTaskButton = document.querySelector(".add-task-button");
-const createTaskform = document.querySelector(".create-task");
-addTaskButton.addEventListener("click", () => {
-    createTaskform.classList.toggle("hidden");
-})
 
-const addProjectButton = document.querySelector(".project-button");
-const createProjectForm = document.querySelector(".add-project-form");
-addProjectButton.addEventListener("click", () => {
-    createProjectForm.classList.toggle("hidden");
-})
+
+
+
+
+
+
