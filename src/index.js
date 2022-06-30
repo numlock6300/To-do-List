@@ -13,11 +13,11 @@ import "./img/move.png";
 import "./img/delete.png";
 
 import { Task } from "./Tasks";
-// import { Project } from "./projects";
+import { Project } from "./projects";
 import { format } from "date-fns";
 import * as events from "./eventListeners";
 import { createProject } from "./functions";
-import { renderProject } from "./renders";
+import { renderProject, renderProjectOptions, renderTaskPriorities } from "./renders";
 
 
 // const task1 = new Task("Task","some task", " 12.12.2022", "Low", "Default");
@@ -28,11 +28,20 @@ import { renderProject } from "./renders";
 
 // console.log(format(new Date(2014, 1,11), "yyyy-MM-dd"));
 createProject("My project");
+// createProject("My project2");
+// createProject("My project3");
  events.OpenAddTaskForm();
+ events.CloseAddTaskForm();
  events.OpenAddProjectForm();
  events.CloseAddProjectForm();
  events.AddProject();
+ events.AddTask();
  renderProject();
+ renderProjectOptions();
+ renderTaskPriorities();
+ 
+
+
 
 
 

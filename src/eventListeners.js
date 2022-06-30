@@ -1,10 +1,12 @@
 import { Project } from "./projects";
 import { createProject } from "./functions";
 import { toggleProjectForm } from "./functions";
-import { renderProjectOptions } from "./renders";
+import { createTask } from "./functions";
+import { renderProjectOptions, renderTasks } from "./renders";
 import { renderProject } from "./renders";
 import * as domElements from "./domElements";
 
+// Task events
 export function OpenAddTaskForm() {
     const addTaskButton = document.querySelector(".add-task-button");
     const createTaskform = document.querySelector(".create-task");
@@ -13,10 +15,26 @@ export function OpenAddTaskForm() {
     })
 }
 
+export function CloseAddTaskForm() {
+    const createTaskform = document.querySelector(".create-task");
+    domElements.closeTaskButton.addEventListener("click", () => {
+        createTaskform.classList.toggle("hidden");
+    })
+}
+
+export function AddTask() {
+    domElements.okTaskButton.addEventListener("click", () => {
+        createTask(domElements.taskFormTitle, domElements.taskFormDueDate,
+            domElements.taskFormDescription, domElements.taskFormPriority, domElements.projectSelectList);
+        renderTasks();
+
+    })
+}
+
+// Project events
 export function OpenAddProjectForm() {
     const addProjectButton = document.querySelector(".project-button");
     addProjectButton.addEventListener("click", () => {
-        // domElements.createProjectForm.classList.toggle("hidden");
         toggleProjectForm()
         domElements.projectNameField.value = "New Project";
 })
@@ -25,7 +43,6 @@ export function OpenAddProjectForm() {
 export function CloseAddProjectForm() {
     const closeProjectButton = document.querySelector("#project-cancel-button");
     closeProjectButton.addEventListener("click", () => {
-        // domElements.createProjectForm.classList.add("hidden");
         toggleProjectForm();
     })
 
@@ -37,7 +54,6 @@ export function AddProject() {
     okProjectButton.addEventListener("click", () => {
         createProject(domElements.projectNameField.value);
         renderProject();
-        // domElements.createProjectForm.classList.add("hidden");
         renderProjectOptions();
         toggleProjectForm();
     })

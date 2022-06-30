@@ -17,4 +17,8 @@ export class Project {
     addTask(task){
         this.container.push(task);
     }
+
+    getTasks(){
+        return this.container;
+    }
 }

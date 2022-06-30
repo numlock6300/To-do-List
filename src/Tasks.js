@@ -1,11 +1,20 @@
 export class Task {
-    constructor(title, description, dueDate, priority, project){
+    constructor(title, dueDate, description, priority, project){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.project = project;
     }
+
+    static descriptions = ["Low", "Medium", "High"];
+    static buttonImages = new Map([
+        ["edit", "./img/edit.png"],
+        ["priority", "./img/priority.png"],
+        ["move", "./img/move.png"],
+        ["delete", "./img/delete.png"],
+    ])
+    static descriptionFields = ["Title: ", "Due Date: ", "Description: ", "Priority: "]
 
     getTitle(){
         return this.title;
