@@ -18,6 +18,10 @@ export class Project {
         this.container.push(task);
     }
 
+    deleteTask(taskIndex) {
+        this.container.splice(taskIndex, 1);
+    }
+
     getTasks(){
         return this.container;
     }

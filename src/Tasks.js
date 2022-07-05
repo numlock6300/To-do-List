@@ -1,12 +1,14 @@
 export class Task {
+    static lastId = 0;
     constructor(title, dueDate, description, priority, project){
+        this.id = Task.lastId++;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.project = project;
     }
-
+    
     static descriptions = ["Low", "Medium", "High"];
     static buttonImages = new Map([
         ["edit", "./img/edit.png"],
@@ -54,6 +56,10 @@ export class Task {
 
     setProject(project){
         this.project = project;
+    }
+
+    getTaskId(){
+        return this.id;
     }
     
 }

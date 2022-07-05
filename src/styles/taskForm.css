@@ -3,7 +3,8 @@ form * {
     width: 100%;
 }
 
-.create-task {
+.create-task,
+.edit-task {
     background-color: white;
     display: grid;
     position:absolute;

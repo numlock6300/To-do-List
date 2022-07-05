@@ -1,6 +1,7 @@
 import { Project } from "./projects";
 import { Task } from "./Tasks";
 import * as domElements from "./domElements";
+import * as events from "./eventListeners";
 
 export function renderProject(){
     const projectsContainer = document.querySelector(".projects-container");
@@ -12,24 +13,25 @@ export function renderProject(){
     })   
 }
 
-export function renderProjectOptions(){
-    domElements.projectSelectList.innerHTML = "";
+export function renderProjectOptions(selectElement){
+    selectElement.innerHTML = "";
     Project.projects.forEach((project) => {
         const projectOption = document.createElement("option");
         projectOption.value = project.getName();
         // console.log(project.getName());
         projectOption.innerHTML = project.getName();
-        domElements.projectSelectList.appendChild(projectOption);
+        selectElement.appendChild(projectOption);
+        //domElements.editTaskFormProject.appendChild(projectOption);
     })
 }
 
-export function renderTaskPriorities(){
-    domElements.taskFormPriority.innerHTML = "";
+export function renderTaskPriorities(selectElement){
+    selectElement.innerHTML = "";
     Task.descriptions.forEach((description) => {
         const descriptionOption = document.createElement("option");
         descriptionOption.value = description;
         descriptionOption.innerHTML = description;
-        domElements.taskFormPriority.appendChild(descriptionOption);
+        selectElement.appendChild(descriptionOption);
     })
 }
 
@@ -41,16 +43,35 @@ export function renderTasks(){
             const taskContainer = domElements.createElement("div", "task-container", domElements.mainContent);
             const taskOverview = domElements.createElement("div", "task-overview", taskContainer);
             const taskDescription = domElements.createElement("div", "task-description", taskContainer);
+            taskDescription.classList.add("hidden");
             const taskName = domElements.createElement("div", "task-name", taskOverview);
             taskName.innerHTML = task.getTitle();
             const taskButtons = domElements.createElement("div", "task-buttons", taskOverview);
 
             for (let [key, value] of Task.buttonImages) {
                 const taskButton = domElements.createElement("button", "task-button", taskButtons);
+                taskButton.setAttribute("id", task.getTaskId());
                 const buttonImage = domElements.createElementWithoutClass("img", taskButton);
                 //const buttonImage = new Image();
                 buttonImage.src = value;
                 buttonImage.alt = key;
+                switch(key) {
+                    case Array.from(Task.buttonImages.keys())[0]:
+                        events.OpenEditTaskForm(taskButton);
+                        break;
+                    case Array.from(Task.buttonImages.keys())[1]:
+                        console.log("priority");
+                        break;
+                    case Array.from(Task.buttonImages.keys())[2]:
+                        console.log("move");
+                        break;
+                    case Array.from(Task.buttonImages.keys())[3]:
+                        events.RemoveTask(taskButton);
+                        break;
+                    default: break;
+                }
+                // console.log(Array.from(Task.buttonImages.keys())[2])
+                
                 //taskButton.appendChild(buttonImage);
             }
 

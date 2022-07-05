@@ -18,6 +18,7 @@ import { format } from "date-fns";
 import * as events from "./eventListeners";
 import { createProject } from "./functions";
 import { renderProject, renderProjectOptions, renderTaskPriorities } from "./renders";
+import * as domElements from "./domElements";
 
 
 // const task1 = new Task("Task","some task", " 12.12.2022", "Low", "Default");
@@ -36,9 +37,16 @@ createProject("My project");
  events.CloseAddProjectForm();
  events.AddProject();
  events.AddTask();
+ events.showDescription();
+ events.CloseEditTaskForm();
+ events.UpdateTask();
  renderProject();
- renderProjectOptions();
- renderTaskPriorities();
+ renderProjectOptions(domElements.projectSelectList);
+ renderProjectOptions(domElements.editTaskFormProject);
+ renderTaskPriorities(domElements.taskFormPriority);
+ renderTaskPriorities(domElements.editTaskFormPriority);
+
+ events.Test();
  
 
 

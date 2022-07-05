@@ -23,6 +23,7 @@
 .task-name {
     justify-self: flex-start;
     font-size: 1.2rem;
+    pointer-events: none;
 }
 
 .task-buttons {

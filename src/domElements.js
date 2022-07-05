@@ -12,8 +12,20 @@ export const taskFormDescription = document.querySelector("#description");
 export const taskFormPriority = document.querySelector("#priority");
 export const projectSelectList = document.querySelector("#select-project");
 
+// Task Edit Form Elements
+export const editTaskForm = document.querySelector(".edit-task");
+export const closeEditTaskButton = document.querySelector(".edit-task-cancel-button");
+export const updateEditTaskButton = document.querySelector(".task-update-button");
+export const editTaskFormTitle = document.querySelector("#edit-title");
+export const edtiTaskFormDueDate = document.querySelector("#edit-due-date");
+export const editTaskFormDescription = document.querySelector("#edit-description");
+export const editTaskFormPriority = document.querySelector("#edit-priority");
+export const editTaskFormProject = document.querySelector("#edit-select-project");
+
 //Task elements
 export const mainContent = document.querySelector(".main-content");
+//export const taskOverview = document.querySelectorAll(".taskOverview")
+
 
 export function createElement(elemType, elemClass, parentName){
     const element = document.createElement(elemType);
