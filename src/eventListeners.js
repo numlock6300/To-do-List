@@ -1,7 +1,7 @@
 import { Project } from "./projects";
 import { createProject } from "./functions";
 import { toggleProjectForm } from "./functions";
-import { createTask, populateEditForm, updateValues, getCurrentTask, getProjectIndex, deleteTaskFromProject } from "./functions";
+import { createTask, populateEditForm, updateValues, getCurrentTask, getProjectIndex, deleteTaskFromProject, changeDescriptionField, popUpActivator, moveTask } from "./functions";
 import { renderProjectOptions, renderTasks } from "./renders";
 import { renderProject } from "./renders";
 import * as domElements from "./domElements";
@@ -60,6 +60,35 @@ export function UpdateTask() {
 
 }
 
+export function ShowChangeForm(button, form) {
+    button.addEventListener("click", () => {
+        form.classList.remove("hidden");
+        //console.log("unhid");
+    })
+}
+
+export function PrioritySelect(select) {
+    select.addEventListener("click", (e) => {
+        console.log(e.target);
+        console.log(select.value);
+        getCurrentTask(parseInt(select.getAttribute("id"))).setPriority(select.value);
+        changeDescriptionField(parseInt(select.getAttribute("id")), select.value);
+    })
+
+}
+
+export function ProjectSelect(select){
+    select.classList.add("overflow-on");
+    select.addEventListener("click", (e) => {
+        console.log(e.target);
+        console.log(select.value);
+        const task = getCurrentTask(parseInt(select.getAttribute("id")));
+        console.log(task);
+        moveTask(task, task.getProject(), select.value);
+        task.setProject(select.value);
+    })
+}
+
 export function RemoveTask(button) {
     button.addEventListener("click", (e) => {
         const targetTask = getCurrentTask(parseInt(e.target.getAttribute("id")));
@@ -97,6 +126,10 @@ export function AddProject() {
         renderProject();
         renderProjectOptions(domElements.projectSelectList);
         renderProjectOptions(domElements.editTaskFormProject);
+        const selectProject = Array.from(document.querySelectorAll(".select-project"));
+        selectProject.forEach((project) => {
+            renderProjectOptions(project);
+        }) 
         toggleProjectForm();
     })
 }
@@ -126,8 +159,25 @@ export function Test() {
         console.log(Project.projects)
         //let currentTask = Project.projects.map((project) => project.getTasks().filter((task) => task.getTaskId() === 0))
         //console.log(currentTask);
-        let projectIndex = Project.projects.map(project => project.getName());
-        console.log(projectIndex.indexOf("My project"));
-        console.log(Project.projects[0].getName());
+        //let projectIndex = Project.projects.map(project => project.getName());
+        //console.log(projectIndex.indexOf("My project"));
+        //console.log(Project.projects[0].getName());
     })
+}
+
+export function BodyEvents() {
+    document.addEventListener("click", (e) => {
+        //console.log("click");
+        popUpActivator(e, ".change-priority-container");
+        popUpActivator(e, ".change-project-container");
+        // const isCLosest = e.target.closest(".change-priority-container");
+        // const changePriorityForms = Array.from(document.querySelectorAll(".change-priority-container"));
+        // if(!isCLosest){
+        //     //console.log("hid")
+        //     changePriorityForms.forEach((form) => {
+        //         form.classList.add("hidden");
+        //     })
+        // }
+        
+    }, true) 
 }

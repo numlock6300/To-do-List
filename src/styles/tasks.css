@@ -30,6 +30,7 @@
     display: flex; 
     gap: 1rem; 
     justify-self: flex-end;
+    position: relative;
 }
 
 .task-button {

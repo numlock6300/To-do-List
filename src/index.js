@@ -31,6 +31,7 @@ import * as domElements from "./domElements";
 createProject("My project");
 // createProject("My project2");
 // createProject("My project3");
+events.BodyEvents();
  events.OpenAddTaskForm();
  events.CloseAddTaskForm();
  events.OpenAddProjectForm();
@@ -47,6 +48,7 @@ createProject("My project");
  renderTaskPriorities(domElements.editTaskFormPriority);
 
  events.Test();
+ 
  
 
 

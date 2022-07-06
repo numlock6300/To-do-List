@@ -69,7 +69,7 @@ export function deleteTaskFromProject(currentTask, projectIndex) {
 
 }
 
-function moveTask(task, fromProject, toProject){
+export function moveTask(task, fromProject, toProject){
     const fromProjectIndex = getProjectIndex(fromProject)//Project.projects.map(project => project.getName()).indexOf(fromProject);
     const toProjectIndex = getProjectIndex(toProject)//.projects.map(project => project.getName()).indexOf(toProject);
     Project.projects[toProjectIndex].addTask(task);
@@ -92,6 +92,22 @@ export function updateValues(){
    
    //console.log(task);
    
+}
+
+export function changeDescriptionField(taskId, priority){
+    const descriptionField = document.querySelector(`span[priority-id="${taskId}"]`);
+    descriptionField.innerHTML = priority;
+}
+
+export function popUpActivator(e, activator){
+    const isCLosest = e.target.closest(activator);
+        const changePriorityForms = Array.from(document.querySelectorAll(activator));
+        if(!isCLosest){
+            //console.log("hid")
+            changePriorityForms.forEach((form) => {
+                form.classList.add("hidden");
+            })
+        }
 }
 
 // export function addProjectOption(name) {

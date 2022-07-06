@@ -48,6 +48,22 @@ export function renderTasks(){
             taskName.innerHTML = task.getTitle();
             const taskButtons = domElements.createElement("div", "task-buttons", taskOverview);
 
+            const changePriorityContainer = domElements.createElement("form", "change-priority-container", taskButtons);
+            const selectPriority = domElements.createElement("select", "select-priority", changePriorityContainer);
+            changePriorityContainer.classList.add("hidden");
+            selectPriority.size = 3;
+            selectPriority.setAttribute("id", task.getTaskId());
+            renderTaskPriorities(selectPriority);
+            events.PrioritySelect(selectPriority);
+
+            const changeProjectContainer = domElements.createElement("form", "change-project-container", taskButtons);
+            const selectProject = domElements.createElement("select", "select-project", changeProjectContainer);
+            changeProjectContainer.classList.add("hidden");
+            selectProject.size = 3;
+            selectProject.setAttribute("id", task.getTaskId());
+            renderProjectOptions(selectProject);
+            events.ProjectSelect(selectProject);
+
             for (let [key, value] of Task.buttonImages) {
                 const taskButton = domElements.createElement("button", "task-button", taskButtons);
                 taskButton.setAttribute("id", task.getTaskId());
@@ -60,10 +76,10 @@ export function renderTasks(){
                         events.OpenEditTaskForm(taskButton);
                         break;
                     case Array.from(Task.buttonImages.keys())[1]:
-                        console.log("priority");
+                        events.ShowChangeForm(taskButton, changePriorityContainer);
                         break;
                     case Array.from(Task.buttonImages.keys())[2]:
-                        console.log("move");
+                        events.ShowChangeForm(taskButton, changeProjectContainer);
                         break;
                     case Array.from(Task.buttonImages.keys())[3]:
                         events.RemoveTask(taskButton);
@@ -71,7 +87,6 @@ export function renderTasks(){
                     default: break;
                 }
                 // console.log(Array.from(Task.buttonImages.keys())[2])
-                
                 //taskButton.appendChild(buttonImage);
             }
 
@@ -92,6 +107,7 @@ export function renderTasks(){
                         break;
                     case Task.descriptionFields[3]:
                         fieldValue.innerHTML = task.getPriority();
+                        fieldValue.setAttribute("priority-id", task.getTaskId())
                         break;
                     default: break;
                 }

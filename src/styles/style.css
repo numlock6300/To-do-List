@@ -159,3 +159,30 @@ span {
     width: 50%;
 }
 
+.change-priority-container,
+.change-project-container {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    /* border-radius: 1rem; */
+    /* box-shadow: 1px 5px 10px black; */
+    /* padding: 2rem; */
+    /* gap: 1rem; */
+}
+
+.change-project-container {
+    left: 30%;
+}
+
+.change-priority-container > select,
+.change-project-container > select {
+    overflow: hidden;
+    padding: 0.2rem;
+}
+
+.overflow-on {
+    overflow: auto;   
+}
+
