@@ -1,8 +1,8 @@
 import { Project } from "./projects";
 import { createProject } from "./functions";
 import { toggleProjectForm } from "./functions";
-import { createTask, populateEditForm, updateValues, getCurrentTask, getProjectIndex, deleteTaskFromProject, changeDescriptionField, popUpActivator, moveTask } from "./functions";
-import { renderProjectOptions, renderTasks } from "./renders";
+import { createTask, populateEditForm, updateValues, getCurrentTask, getProjectIndex, deleteTaskFromProject, changeDescriptionField, popUpActivator, moveTask} from "./functions";
+import { renderProjectOptions, renderTasks, renderProjectTasks, renderTodayTasks } from "./renders";
 import { renderProject } from "./renders";
 import * as domElements from "./domElements";
 import { Task } from "./Tasks";
@@ -50,13 +50,73 @@ export function CloseEditTaskForm() {
     })
 }
 
-export function UpdateTask() {
-    domElements.updateEditTaskButton.addEventListener("click", () => {
-        updateValues();
-        renderTasks();
-        showDescription();
+
+function renderAll() {
+    console.log("1");
+    updateValues();
+    renderTasks();
+    showDescription();
+}
+
+function renderToday() {
+    console.log("2");
+    updateValues();
+    renderTodayTasks();
+    showDescription();
+}
+
+function renderByProject() {
+    console.log("3");
+    const task = getCurrentTask(parseInt(domElements.editTaskForm.getAttribute("id")));
+    const projectIndex = getProjectIndex(task.getProject());
+    updateValues();
+    renderProjectTasks(Project.projects[projectIndex]);
+    showDescription();
+}
+
+export function UpdateTask(renderFunction) {
+
+    switch(renderFunction){
+        case "renderTasks":
+            domElements.updateEditTaskButton.removeEventListener("click", renderToday);
+            domElements.updateEditTaskButton.removeEventListener("click", renderByProject);
+            domElements.updateEditTaskButton.addEventListener("click", renderAll);
+            break;
+        case "renderTodayTasks":
+            domElements.updateEditTaskButton.removeEventListener("click", renderAll);
+            domElements.updateEditTaskButton.removeEventListener("click", renderByProject);
+            domElements.updateEditTaskButton.addEventListener("click", renderToday);
+            break;
+        case "renderProjectTasks":
+            domElements.updateEditTaskButton.removeEventListener("click", renderAll);
+            domElements.updateEditTaskButton.removeEventListener("click", renderToday);
+            domElements.updateEditTaskButton.addEventListener("click", renderByProject);
+            break;
+    }
+
+    //domElements.updateEditTaskButton.addEventListener("click", () => {
+
+        //const task = getCurrentTask(parseInt(domElements.editTaskForm.getAttribute("id")));
+        //const projectIndex = getProjectIndex(task.getProject());
+    
+        //updateValues();
+        //renderTasks();
+        //showDescription();
+        // switch(renderFunction) {
+        //     case "renderTasks":
+        //         renderTasks();
+        //         break;
+        //     case "renderTodayTasks":
+        //         renderTodayTasks();
+        //         break;
+        //     case "renderProjectTasks":
+        //         renderProjectTasks(Project.projects[projectIndex]);
+        //         break;
+        // }
+        // showDescription();
         
-    })
+        
+    //})
 
 }
 
@@ -71,30 +131,57 @@ export function PrioritySelect(select) {
     select.addEventListener("click", (e) => {
         console.log(e.target);
         console.log(select.value);
-        getCurrentTask(parseInt(select.getAttribute("id"))).setPriority(select.value);
-        changeDescriptionField(parseInt(select.getAttribute("id")), select.value);
+        const task = getCurrentTask(parseInt(select.getAttribute("id")));
+        task.setPriority(select.value);
+        changeDescriptionField(parseInt(select.getAttribute("id")), task.getPriority(), "priority-id");
     })
 
 }
 
-export function ProjectSelect(select){
+export function ProjectSelect(select, renderFunction){
     select.classList.add("overflow-on");
     select.addEventListener("click", (e) => {
-        console.log(e.target);
-        console.log(select.value);
+        //console.log(e.target);
+        //console.log(select.value);
         const task = getCurrentTask(parseInt(select.getAttribute("id")));
-        console.log(task);
+        const projectIndex = getProjectIndex(task.getProject());
+        //console.log(task);
         moveTask(task, task.getProject(), select.value);
         task.setProject(select.value);
+        switch(renderFunction) {
+            case "renderTasks":
+                renderTasks();
+                break;
+            case "renderTodayTasks":
+                renderTodayTasks();
+                break;
+            case "renderProjectTasks":
+                renderProjectTasks(Project.projects[projectIndex]);
+                break;
+        }
+        showDescription();
+
     })
 }
 
-export function RemoveTask(button) {
+export function RemoveTask(button, renderFunction) {
     button.addEventListener("click", (e) => {
         const targetTask = getCurrentTask(parseInt(e.target.getAttribute("id")));
         const projectIndex = getProjectIndex(targetTask.getProject());
         deleteTaskFromProject(targetTask, projectIndex);
-        renderTasks();
+        //renderTasks();
+        console.log(renderFunction);
+        switch(renderFunction) {
+            case "renderTasks":
+                renderTasks();
+                break;
+            case "renderTodayTasks":
+                renderTodayTasks();
+                break;
+            case "renderProjectTasks":
+                renderProjectTasks(Project.projects[projectIndex]);
+                break;
+        }
         showDescription();
 
         
@@ -153,6 +240,34 @@ export function showDescription() {
 
 //     }, true) 
 // }
+
+export function ShowProjecTasks(projectElement, project){
+    projectElement.addEventListener("click", () => {
+        console.log(project.getName());
+        renderProjectTasks(project);
+        showDescription();
+        UpdateTask("renderProjectTasks");
+
+    })
+}
+
+export function ShowAllTasks(){
+    domElements.inbox.addEventListener("click", ()=> {
+        renderTasks();
+        showDescription();
+        UpdateTask("renderTasks");
+    })
+}
+
+export function ShowTodayTasks(){
+    domElements.today.addEventListener("click", ()=> {
+        console.log("today");
+        renderTodayTasks();
+        showDescription();
+        UpdateTask("renderTodayTasks");
+        
+    })
+}
 
 export function Test() {
     document.querySelector(".logo-title").addEventListener("click", () => {

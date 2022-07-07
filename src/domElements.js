@@ -26,6 +26,9 @@ export const editTaskFormProject = document.querySelector("#edit-select-project"
 export const mainContent = document.querySelector(".main-content");
 //export const taskOverview = document.querySelectorAll(".taskOverview")
 
+export const inbox = document.querySelector(".inbox");
+export const today = document.querySelector(".today");
+
 
 export function createElement(elemType, elemClass, parentName){
     const element = document.createElement(elemType);

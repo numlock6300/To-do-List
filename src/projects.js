@@ -1,5 +1,9 @@
 export class Project {
+
+    static lastId = 0;
+
     constructor(name){
+        this.id =  Project.lastId++;
         this.name = name;
         this.container = [];
     }
@@ -24,5 +28,9 @@ export class Project {
 
     getTasks(){
         return this.container;
+    }
+
+    getProjectId(){
+        return this.id;
     }
 }
