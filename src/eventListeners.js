@@ -25,19 +25,16 @@ export function CloseAddTaskForm() {
 
 export function AddTask() {
     domElements.okTaskButton.addEventListener("click", () => {
-        createTask(domElements.taskFormTitle, domElements.taskFormDueDate,
-            domElements.taskFormDescription, domElements.taskFormPriority, domElements.projectSelectList);
+        createTask(domElements.taskFormTitle.value, domElements.taskFormDueDate.value,
+            domElements.taskFormDescription.value, domElements.taskFormPriority.value, domElements.projectSelectList.value);
         renderTasks();
         showDescription();
-        //console.log(Project.projects[0])
-        
-
+        localStorage.setItem("data",JSON.stringify(Project.projects));
     })
 }
 
 export function OpenEditTaskForm(button) {
     button.addEventListener("click", (e) => {
-        //console.log(e.target.getAttribute("id"));
         domElements.editTaskForm.classList.toggle("hidden");
         domElements.editTaskForm.setAttribute("id", e.target.getAttribute("id"));
         populateEditForm(e.target.getAttribute("id"));
@@ -56,6 +53,7 @@ function renderAll() {
     updateValues();
     renderTasks();
     showDescription();
+    localStorage.setItem("data",JSON.stringify(Project.projects));
 }
 
 function renderToday() {
@@ -63,6 +61,7 @@ function renderToday() {
     updateValues();
     renderTodayTasks();
     showDescription();
+    localStorage.setItem("data",JSON.stringify(Project.projects));
 }
 
 function renderByProject() {
@@ -72,6 +71,7 @@ function renderByProject() {
     updateValues();
     renderProjectTasks(Project.projects[projectIndex]);
     showDescription();
+    localStorage.setItem("data",JSON.stringify(Project.projects));
 }
 
 export function UpdateTask(renderFunction) {
@@ -123,7 +123,6 @@ export function UpdateTask(renderFunction) {
 export function ShowChangeForm(button, form) {
     button.addEventListener("click", () => {
         form.classList.remove("hidden");
-        //console.log("unhid");
     })
 }
 
@@ -134,18 +133,17 @@ export function PrioritySelect(select) {
         const task = getCurrentTask(parseInt(select.getAttribute("id")));
         task.setPriority(select.value);
         changeDescriptionField(parseInt(select.getAttribute("id")), task.getPriority(), "priority-id");
+        localStorage.setItem("data",JSON.stringify(Project.projects));
     })
+    
 
 }
 
 export function ProjectSelect(select, renderFunction){
     select.classList.add("overflow-on");
     select.addEventListener("click", (e) => {
-        //console.log(e.target);
-        //console.log(select.value);
         const task = getCurrentTask(parseInt(select.getAttribute("id")));
         const projectIndex = getProjectIndex(task.getProject());
-        //console.log(task);
         moveTask(task, task.getProject(), select.value);
         task.setProject(select.value);
         switch(renderFunction) {
@@ -160,6 +158,7 @@ export function ProjectSelect(select, renderFunction){
                 break;
         }
         showDescription();
+        localStorage.setItem("data",JSON.stringify(Project.projects));
 
     })
 }
@@ -170,7 +169,6 @@ export function RemoveTask(button, renderFunction) {
         const projectIndex = getProjectIndex(targetTask.getProject());
         deleteTaskFromProject(targetTask, projectIndex);
         //renderTasks();
-        console.log(renderFunction);
         switch(renderFunction) {
             case "renderTasks":
                 renderTasks();
@@ -182,9 +180,8 @@ export function RemoveTask(button, renderFunction) {
                 renderProjectTasks(Project.projects[projectIndex]);
                 break;
         }
-        showDescription();
-
-        
+        showDescription(); 
+        localStorage.setItem("data",JSON.stringify(Project.projects));   
     })
 }
 
@@ -218,28 +215,18 @@ export function AddProject() {
             renderProjectOptions(project);
         }) 
         toggleProjectForm();
+        localStorage.setItem("data",JSON.stringify(Project.projects));
     })
 }
 
 export function showDescription() {
     const taskOverview = Array.from(document.querySelectorAll(".task-overview"));
-    //console.log(taskOverview);
-    const taskDescription = document.querySelector(".task-description");
     taskOverview.forEach(task => task.addEventListener("click", (e) => {
-        //console.log("click")
-        if(e.target === e.currentTarget){
-            
+        if(e.target === e.currentTarget){      
         e.target.nextElementSibling.classList.toggle("hidden")
         }
     }), true)
 }
-
-// export function editTask(button) {
-//     button.addEventListener("click", (e) => {
-//         console.log(e.target.getAttribute("id"));
-
-//     }, true) 
-// }
 
 export function ShowProjecTasks(projectElement, project){
     projectElement.addEventListener("click", () => {
@@ -272,27 +259,12 @@ export function ShowTodayTasks(){
 export function Test() {
     document.querySelector(".logo-title").addEventListener("click", () => {
         console.log(Project.projects)
-        //let currentTask = Project.projects.map((project) => project.getTasks().filter((task) => task.getTaskId() === 0))
-        //console.log(currentTask);
-        //let projectIndex = Project.projects.map(project => project.getName());
-        //console.log(projectIndex.indexOf("My project"));
-        //console.log(Project.projects[0].getName());
     })
 }
 
 export function BodyEvents() {
     document.addEventListener("click", (e) => {
-        //console.log("click");
         popUpActivator(e, ".change-priority-container");
         popUpActivator(e, ".change-project-container");
-        // const isCLosest = e.target.closest(".change-priority-container");
-        // const changePriorityForms = Array.from(document.querySelectorAll(".change-priority-container"));
-        // if(!isCLosest){
-        //     //console.log("hid")
-        //     changePriorityForms.forEach((form) => {
-        //         form.classList.add("hidden");
-        //     })
-        // }
-        
     }, true) 
 }

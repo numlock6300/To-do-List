@@ -8,7 +8,7 @@ export class Project {
         this.container = [];
     }
 
-    static projects = [];
+    static projects = []; //JSON.parse(localStorage.getItem("data"));
 
     getName() {
         return this.name;

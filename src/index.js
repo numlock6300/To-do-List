@@ -12,46 +12,55 @@ import "./img/priority.png";
 import "./img/move.png";
 import "./img/delete.png";
 
-import { Task } from "./Tasks";
-import { Project } from "./projects";
-import { format } from "date-fns";
+
 import * as events from "./eventListeners";
-import { createProject } from "./functions";
-import { renderProject, renderProjectOptions, renderTaskPriorities } from "./renders";
+import { createProject, createTask } from "./functions";
+import { renderProject, renderProjectOptions, renderTaskPriorities, renderTasks } from "./renders";
 import * as domElements from "./domElements";
+import { Project } from "./projects";
 
 
-// const task1 = new Task("Task","some task", " 12.12.2022", "Low", "Default");
-// console.log(task1.getTitle());
+//createProject("My project");
 
-// const project1 = new Project("New Project");
-// console.log(project1.getName());
+let test = localStorage.getItem("data");
 
-// console.log(format(new Date(2014, 1,11), "yyyy-MM-dd"));
-createProject("My project");
-// createProject("My project2");
-// createProject("My project3");
+function getLocalData(){
+    JSON.parse(test).forEach(project => {
+        createProject(project.name);
+        for(let i=0; i < project.container.length; i++){
+            console.log("Project name " + project.container[i].project);
+            createTask(project.container[i].title, project.container[i].dueDate, project.container[i].description, project.container[i].priority, project.container[i].project);
+        }
+        
+    });
+}
+
+getLocalData();
+
 events.BodyEvents();
- events.OpenAddTaskForm();
- events.CloseAddTaskForm();
- events.OpenAddProjectForm();
- events.CloseAddProjectForm();
- events.AddProject();
- events.AddTask();
- events.showDescription();
- events.CloseEditTaskForm();
- events.UpdateTask("renderTasks");
- events.ShowAllTasks();
- events.ShowTodayTasks();
- renderProject();
- renderProjectOptions(domElements.projectSelectList);
- renderProjectOptions(domElements.editTaskFormProject);
- renderTaskPriorities(domElements.taskFormPriority);
- renderTaskPriorities(domElements.editTaskFormPriority);
+events.OpenAddTaskForm();
+events.CloseAddTaskForm();
+events.OpenAddProjectForm();
+events.CloseAddProjectForm();
+events.AddProject();
+events.AddTask();
+events.CloseEditTaskForm();
+events.UpdateTask("renderTasks");
+events.ShowAllTasks();
+events.ShowTodayTasks();
+renderProject();
+renderProjectOptions(domElements.projectSelectList);
+renderProjectOptions(domElements.editTaskFormProject);
+renderTaskPriorities(domElements.taskFormPriority);
+renderTaskPriorities(domElements.editTaskFormPriority);
+renderTasks();
+events.showDescription();
 
- events.Test();
- 
- 
+
+events.Test();
+//console.log(JSON.parse(test)[0].container[0].title);
+//console.log(JSON.parse(test));
+ //console.log(Project.projects);
 
 
 

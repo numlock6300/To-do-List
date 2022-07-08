@@ -33,10 +33,8 @@ function addTaskToProject(task){
 }
 
 export function createTask(title, dueDate, description, priority, project){
-    const task  = new Task(title.value, dueDate.value, description.value, priority.value, project.value);
+    const task  = new Task(title, dueDate, description, priority, project);
     addTaskToProject(task);   
-    //console.log(task.getTaskId());
-    //console.log(getCurrentTask(0));
 }
 
 export function populateEditForm(id){
@@ -63,7 +61,6 @@ export function getCurrentTask(id) {
             break;
     }
     }
-    //console.log(currentTask);
     return currentTask[0];
 }
 
@@ -75,7 +72,6 @@ export function getProjectIndex(projectName) {
 export function deleteTaskFromProject(currentTask, projectIndex) {
     console.log(`delete ${currentTask.getTitle()} from ${Project.projects[projectIndex].getName()}`);
     const taskIndex = Project.projects[projectIndex].getTasks().map(task => task.getTaskId()).indexOf(currentTask.getTaskId());
-    //console.log(taskIndex);
     Project.projects[projectIndex].deleteTask(taskIndex);
 
 
@@ -105,15 +101,12 @@ export function updateValues(){
    document.querySelector(".task-name").innerHTML = task.getTitle();
    changeDescriptionField(parseInt(task.getTaskId()), task.getDueDate(), "due-date-id");
    changeDescriptionField(parseInt(task.getTaskId()), task.getDescription(), "description-id");
-   changeDescriptionField(parseInt(task.getTaskId()), task.getPriority(), "priority-id");
-   
-   //console.log(task);
+   changeDescriptionField(parseInt(task.getTaskId()), task.getPriority(), "priority-id");   
    
 }
 
 export function changeDescriptionField(taskId, fieldValue, selector){
     const descriptionField = document.querySelector(`span[${selector}="${taskId}"]`);
-    //console.log(fieldValue);
     descriptionField.innerHTML = fieldValue;
 }
 
@@ -121,7 +114,6 @@ export function popUpActivator(e, activator){
     const isCLosest = e.target.closest(activator);
         const changePriorityForms = Array.from(document.querySelectorAll(activator));
         if(!isCLosest){
-            //console.log("hid")
             changePriorityForms.forEach((form) => {
                 form.classList.add("hidden");
             })
@@ -133,9 +125,6 @@ export function getTodayTasks(){
     const currentDate = format(new Date(), "yyyy-MM-dd");
     Project.projects.forEach((project) => {
         for(let task of project.getTasks()){
-            //console.log(currentDate);
-            //console.log(task.getDueDate());
-            //console.log(isEqual(parseISO(currentDate), parseISO(task.getDueDate())));
             if(isEqual(parseISO(currentDate), parseISO(task.getDueDate()))){
                 todayTasks.push(task);
             }
@@ -193,8 +182,6 @@ export function createTaskElements(tasks, renderFunction) {
                     break;
                 default: break;
             }
-            // console.log(Array.from(Task.buttonImages.keys())[2])
-            //taskButton.appendChild(buttonImage);
         }
 
         for (let field of Task.descriptionFields) {
@@ -222,19 +209,7 @@ export function createTaskElements(tasks, renderFunction) {
                 default: break;
             }
             
-
         }
-
-
-
-
 
     }
 }
-
-// export function addProjectOption(name) {
-//     const projectOption = document.createElement("option");
-//     projectOption.value = name.toLowerCase();
-//     projectOption.innerHTML = name;
-//     domElements.projectSelectList.appendChild(projectOption);
-// }

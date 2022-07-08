@@ -27,5 +27,18 @@ form * {
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
+    height: 2rem;
+}
+
+.task-form-buttons > button {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.input-container > input,
+.input-container > textarea,
+.input-container > select {
+    border-radius: 5px;
+    padding: 0.3rem;
 }
 
