@@ -256,6 +256,23 @@ export function ShowTodayTasks(){
     })
 }
 
+export function CheckTask(checkbox, container, overview){
+    checkbox.addEventListener("change", () => {
+        if(checkbox.checked){
+            console.log("Checked");
+            container.classList.add("checked");
+            overview.classList.remove("task-overview");
+            overview.classList.add("task-overview-checked");
+        }
+        else{
+            console.log("Unchecked");
+            container.classList.remove("checked");
+            overview.classList.add("task-overview");
+            overview.classList.remove("task-overview-checked");
+        }
+    })
+}
+
 export function Test() {
     document.querySelector(".logo-title").addEventListener("click", () => {
         console.log(Project.projects)

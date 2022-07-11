@@ -137,12 +137,19 @@ export function createTaskElements(tasks, renderFunction) {
     for (let task of tasks) {
         // console.log(task.keys);
         const taskContainer = domElements.createElement("div", "task-container", domElements.mainContent);
+        taskContainer.setAttribute("task-container-id", task.getTaskId());
         const taskOverview = domElements.createElement("div", "task-overview", taskContainer);
         const taskDescription = domElements.createElement("div", "task-description", taskContainer);
         taskDescription.classList.add("hidden");
+        const checkTask = domElements.createElement("input", "check-task", taskOverview);
+        checkTask.type = "checkbox";
+        checkTask.name = "check-task";
+        checkTask.id = "check-task";
+        checkTask.setAttribute("checkbox-task-id", task.getTaskId());
         const taskName = domElements.createElement("div", "task-name", taskOverview);
         taskName.innerHTML = task.getTitle();
         const taskButtons = domElements.createElement("div", "task-buttons", taskOverview);
+        events.CheckTask(checkTask,taskContainer,taskOverview);
 
         const changePriorityContainer = domElements.createElement("form", "change-priority-container", taskButtons);
         const selectPriority = domElements.createElement("select", "select-priority", changePriorityContainer);
