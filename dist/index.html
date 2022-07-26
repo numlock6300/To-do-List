@@ -1,60 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do-List</title>
-<script defer src="main.js"></script></head>
-<header>
-    <div class="logo-container">
-        <img src="./img/logo.jpg" alt="logo">
-    </div>
-    <div class="logo-title">
-        <h1>To-Do...</h1>
-    </div>
-    <div class="add-task-button-container"><button class="add-task-button">Add Task</button></div>
-</header>
-<body>
-    <div class="content">
-        <div class="sidebar">
-            <ul>
-                <li class="inbox">
-                    <img src="./img/inbox.png" alt="Inbox">
-                    <span>Inbox</span>
-                </li>
-                <li class="today">
-                    <img src="./img/today.png" alt="Today">
-                    <span>Today</span>
-                </li>
-                <li> 
-                    <div>
-                        <img src="./img/projects.png" alt="Projects">
-                        <span>Projects</span>
-                    </div>
-                        <ul class="projects-container">
-                            <!-- <li>My project</li>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>To-Do-List</title>
+		<script defer src="./main.js"></script>
+	</head>
+	<header>
+		<div class="logo-container">
+			<img src="./img/logo.jpg" alt="logo" />
+		</div>
+		<div class="logo-title">
+			<h1>To-Do...</h1>
+		</div>
+		<div class="add-task-button-container">
+			<button class="add-task-button">Add Task</button>
+		</div>
+	</header>
+	<body>
+		<div class="content">
+			<div class="sidebar">
+				<ul>
+					<li class="inbox">
+						<img src="./img/inbox.png" alt="Inbox" />
+						<span>Inbox</span>
+					</li>
+					<li class="today">
+						<img src="./img/today.png" alt="Today" />
+						<span>Today</span>
+					</li>
+					<li>
+						<div>
+							<img src="./img/projects.png" alt="Projects" />
+							<span>Projects</span>
+						</div>
+						<ul class="projects-container">
+							<!-- <li>My project</li>
                             <li>
                                 <button class="project-button">+</button>
                             </li> -->
-                        </ul>
-                        <button class="project-button">+</button>
-                </li>
-            </ul>
-            <form class="add-project-form hidden">
-                <div class="input-container">
-                    <label for="project-name">Name: </label>
-                    <input type="text" name="project-name" id="project-name" required>
-                </div>
-                <div class="add-project-form-buttons">
-                    <button type="button" id="project-ok-button">Ok</button>
-                    <button type="button" id="project-cancel-button">Cancel</button>
-                </div>
-            </form>
-            
-        </div>
-        <div class="main-content">
-            <!-- <div class="task-container">
+						</ul>
+						<button class="project-button">+</button>
+					</li>
+				</ul>
+				<form class="add-project-form hidden">
+					<div class="input-container">
+						<label for="project-name">Name: </label>
+						<input
+							type="text"
+							name="project-name"
+							id="project-name"
+							required
+						/>
+					</div>
+					<div class="add-project-form-buttons">
+						<button type="button" id="project-ok-button">Ok</button>
+						<button type="button" id="project-cancel-button">
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+			<div class="main-content">
+				<!-- <div class="task-container">
                 <div class="task-overview">
                     <div class="task-name">Task</div>
                     <div class="task-buttons">
@@ -87,85 +96,105 @@
                     </div>
                 </div>
             </div> -->
-        </div>
-        <form class="create-task hidden">
-            <div class="input-container">
-                <label for="title">Title: </label>
-                <input type="text" name="title" id="title" required>
-            </div>
-            <div class="input-container">
-                <label for="due-date">Due Date: </label>
-                <input type="date" name="due-date" id="due-date">
-            </div>
-            <div class="input-container">
-                <label for="description">Description: </label>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
-            </div>
-            <div class="input-container">
-                <label for="priority">Priority: </label>
-                <select name="priority" id="priority">
-                    <!-- <option value="low">Low</option>
+			</div>
+			<form class="create-task hidden">
+				<div class="input-container">
+					<label for="title">Title: </label>
+					<input type="text" name="title" id="title" required />
+				</div>
+				<div class="input-container">
+					<label for="due-date">Due Date: </label>
+					<input type="date" name="due-date" id="due-date" />
+				</div>
+				<div class="input-container">
+					<label for="description">Description: </label>
+					<textarea
+						name="description"
+						id="description"
+						cols="30"
+						rows="10"
+					></textarea>
+				</div>
+				<div class="input-container">
+					<label for="priority">Priority: </label>
+					<select name="priority" id="priority">
+						<!-- <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option> -->
-                </select>
-            </div>
-            <div class="input-container">
-                <label for="select-project">Project: </label>
-                <select name="select-project" id="select-project">
-                    <option value="my project">My project</option>
-                </select>
-            </div>
-            <div class="task-form-buttons">
-                <button type="button" class="task-cancel-button">Cancel</button>
-                <button type="submit" class="task-ok-button">Ok</button>
-            </div>
-        </form>
-        <form class="edit-task hidden">
-            <div class="input-container">
-                <label for="edit-title">Title: </label>
-                <input type="text" name="edit-title" id="edit-title">
-            </div>
-            <div class="input-container">
-                <label for="edit-due-date">Due Date: </label>
-                <input type="date" name="edit-due-date" id="edit-due-date">
-            </div>
-            <div class="input-container">
-                <label for="edit-description">Description: </label>
-                <textarea name="edit-description" id="edit-description" cols="30" rows="10"></textarea>
-            </div>
-            <div class="input-container">
-                <label for="edit-priority">Priority: </label>
-                <select name="edit-priority" id="edit-priority">
-                    <!-- <option value="low">Low</option>
+					</select>
+				</div>
+				<div class="input-container">
+					<label for="select-project">Project: </label>
+					<select name="select-project" id="select-project">
+						<option value="my project">My project</option>
+					</select>
+				</div>
+				<div class="task-form-buttons">
+					<button type="button" class="task-cancel-button">
+						Cancel
+					</button>
+					<button type="submit" class="task-ok-button">Ok</button>
+				</div>
+			</form>
+			<form class="edit-task hidden">
+				<div class="input-container">
+					<label for="edit-title">Title: </label>
+					<input type="text" name="edit-title" id="edit-title" />
+				</div>
+				<div class="input-container">
+					<label for="edit-due-date">Due Date: </label>
+					<input
+						type="date"
+						name="edit-due-date"
+						id="edit-due-date"
+					/>
+				</div>
+				<div class="input-container">
+					<label for="edit-description">Description: </label>
+					<textarea
+						name="edit-description"
+						id="edit-description"
+						cols="30"
+						rows="10"
+					></textarea>
+				</div>
+				<div class="input-container">
+					<label for="edit-priority">Priority: </label>
+					<select name="edit-priority" id="edit-priority">
+						<!-- <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option> -->
-                </select>
-            </div>
-            <div class="input-container">
-                <label for="edit-select-project">Project: </label>
-                <select name="edit-select-project" id="edit-select-project">
-                    <option value="my project">My project</option>
-                </select>
-            </div>
-            <div class="task-form-buttons">
-                <button type="button" class="edit-task-cancel-button">Cancel</button>
-                <button type="button" class="task-update-button">Update</button>
-            </div>
-        </form>
-        <!-- <form class="change-priority-container">
+					</select>
+				</div>
+				<div class="input-container">
+					<label for="edit-select-project">Project: </label>
+					<select name="edit-select-project" id="edit-select-project">
+						<option value="my project">My project</option>
+					</select>
+				</div>
+				<div class="task-form-buttons">
+					<button type="button" class="edit-task-cancel-button">
+						Cancel
+					</button>
+					<button type="button" class="task-update-button">
+						Update
+					</button>
+				</div>
+			</form>
+			<!-- <form class="change-priority-container">
             <select name="select-priority" id="select-priority" size="3">
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
             </select>
         </form> -->
-        <!-- <form class="change-project-container">
+			<!-- <form class="change-project-container">
             <select name="select-project" id="select-project" size="3">
                 <option value="dfk">dsf</option>
                 <option value="agd">dsf</option>
                 <option value="fsf">sdf</option>
             </select>
         </form> -->
-    </div>
-</body>
+		</div>
+	</body>
 </html>
