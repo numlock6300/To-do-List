@@ -12,27 +12,37 @@ import "./img/priority.png";
 import "./img/move.png";
 import "./img/delete.png";
 
-
 import * as events from "./eventListeners";
 import { createProject, createTask } from "./functions";
-import { renderProject, renderProjectOptions, renderTaskPriorities, renderTasks } from "./renders";
+import {
+	renderProject,
+	renderProjectOptions,
+	renderTaskPriorities,
+	renderTasks,
+} from "./renders";
 import * as domElements from "./domElements";
 import { Project } from "./projects";
-
 
 //createProject("My project");
 
 let test = localStorage.getItem("data");
 
-function getLocalData(){
-    JSON.parse(test).forEach(project => {
-        createProject(project.name);
-        for(let i=0; i < project.container.length; i++){
-            console.log("Project name " + project.container[i].project);
-            createTask(project.container[i].title, project.container[i].dueDate, project.container[i].description, project.container[i].priority, project.container[i].project);
-        }
-        
-    });
+function getLocalData() {
+	if (test) {
+		JSON.parse(test).forEach((project) => {
+			createProject(project.name);
+			for (let i = 0; i < project.container.length; i++) {
+				console.log("Project name " + project.container[i].project);
+				createTask(
+					project.container[i].title,
+					project.container[i].dueDate,
+					project.container[i].description,
+					project.container[i].priority,
+					project.container[i].project
+				);
+			}
+		});
+	}
 }
 
 getLocalData();
@@ -56,18 +66,7 @@ renderTaskPriorities(domElements.editTaskFormPriority);
 renderTasks();
 events.showDescription();
 
-
 events.Test();
 //console.log(JSON.parse(test)[0].container[0].title);
 //console.log(JSON.parse(test));
- //console.log(Project.projects);
-
-
-
-
-
-
-
-
-
-
+//console.log(Project.projects);
